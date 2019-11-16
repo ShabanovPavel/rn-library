@@ -65,6 +65,7 @@ export default function full(Component, {style, statusBar, isBack = true, colorB
 		setStatusBar() {
 			const {nameScreen} = this.state;
 			let status = statusBar;
+
 			if (!status) {
 				status = Utils.getKeyObject(propsWix, 'statusBar');
 			} else {
@@ -76,7 +77,7 @@ export default function full(Component, {style, statusBar, isBack = true, colorB
 						nameScreen,
 						hide: false,
 						style: 'light',
-						colorBackStatusBar,
+						colorBackStatusBar: Theme.theme.color[colorBackStatusBar],
 					});
 					break;
 				case 'light-tr':
@@ -85,11 +86,16 @@ export default function full(Component, {style, statusBar, isBack = true, colorB
 						style: 'light',
 						hide: false,
 						translucent: true,
-						// colorBackStatusBar: 'rgba(255,255,255,',
+						colorBackStatusBar: 'rgba(255,255,255,0)',
 					});
 					break;
 				case 'dark':
-					StatusBar.setStatus({nameScreen, hide: false, style: 'dark', colorBackStatusBar});
+					StatusBar.setStatus({
+						nameScreen,
+						hide: false,
+						style: 'dark',
+						colorBackStatusBar: Theme.theme.color[colorBackStatusBar],
+					});
 					break;
 				case 'dark-tr':
 					StatusBar.setStatus({
@@ -109,10 +115,17 @@ export default function full(Component, {style, statusBar, isBack = true, colorB
 					});
 					break;
 				case 'hide':
-					StatusBar.setStatus({nameScreen, hide: true, colorBackStatusBar});
+					StatusBar.setStatus({
+						nameScreen,
+						hide: true,
+						colorBackStatusBar: Theme.theme.color[colorBackStatusBar],
+					});
 					break;
 				default:
-					StatusBar.setStatus({nameScreen, colorBackStatusBar});
+					StatusBar.setStatus({
+						nameScreen,
+						colorBackStatusBar: Theme.theme.color[colorBackStatusBar],
+					});
 					break;
 			}
 		}
